@@ -1,0 +1,12 @@
+# Unity WebGL 部署配置
+
+# 部署信息
+PUBLIC_URL="https://xxxx-xx-xx-xxx-xx.ngrok-free.app"
+LOCAL_SERVER="http://localhost:5000"
+
+# 安全设置
+SECURITY_LEVEL=1  # 1=基础, 2=增强, 3=最高
+
+# 服务状态
+LAST_START="2023-11-10 08:30:45"
+LAST_UPDATE="2023-11-10 08:30:45"

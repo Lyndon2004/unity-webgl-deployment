@@ -1,0 +1,5 @@
+访问令牌: example_access_token_12345
+管理令牌: example_admin_token_67890abcdef
+
+注意：这些是示例令牌，服务器首次启动时会自动生成新的安全令牌
+请不要编辑此文件，系统会自动管理令牌

@@ -1,0 +1,12 @@
+{
+    "TOTAL_MEMORY": 268435456,
+    "dataUrl": "YourGameName.data",
+    "asmCodeUrl": "YourGameName.asm.code.unityweb",
+    "asmMemoryUrl": "YourGameName.asm.memory.unityweb",
+    "asmFrameworkUrl": "YourGameName.asm.framework.unityweb",
+    "splashScreenStyle": "Dark",
+    "backgroundColor": "#222C36",
+    "developmentBuild": false,
+    "multithreading": false,
+    "unityVersion": "2019.4.1f1"
+}

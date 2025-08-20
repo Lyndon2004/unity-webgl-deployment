@@ -1,0 +1,129 @@
+#!/bin/bash
+
+# Unity WebGL 部署管理主命令
+# 使用方法: unity [start|stop|restart|check|status|logs]
+
+# 获取脚本的真实路径，处理软链接
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+PROJECT_ROOT="$(cd "$(dirname "$SCRIPT_PATH")/.." && pwd)"
+SCRIPTS_DIR="$PROJECT_ROOT/scripts"
+LOGS_DIR="$PROJECT_ROOT/logs"
+CONFIGS_DIR="$PROJECT_ROOT/configs"
+
+case "$1" in
+    start|s)
+        echo "🚀 启动Unity WebGL安全部署..."
+        bash "$SCRIPTS_DIR/start_secure_unity.sh" "$2"
+        ;;
+    stop)
+        echo "🛑 停止Unity WebGL服务..."
+        if [ -f "$SCRIPTS_DIR/stop_secure_unity.sh" ]; then
+            bash "$SCRIPTS_DIR/stop_secure_unity.sh"
+        else
+            echo "正在停止服务..."
+            pkill -f "secure_unity_server.py" 2>/dev/null
+            pkill -f "ngrok" 2>/dev/null
+            echo "✅ 服务已停止"
+        fi
+        ;;
+    restart|r)
+        echo "🔄 重启Unity WebGL服务..."
+        if [ -f "$SCRIPTS_DIR/stop_secure_unity.sh" ]; then
+            bash "$SCRIPTS_DIR/stop_secure_unity.sh"
+        else
+            pkill -f "secure_unity_server.py" 2>/dev/null
+            pkill -f "ngrok" 2>/dev/null
+        fi
+        sleep 2
+        bash "$SCRIPTS_DIR/start_secure_unity.sh"
+        ;;
+    upload-help|uh)
+        echo "📁 显示文件上传指南..."
+        bash "$SCRIPTS_DIR/upload_helper.sh"
+        ;;
+    update|u)
+        if [ -z "$2" ]; then
+            echo "❌ 请提供Unity WebGL构建文件路径"
+            echo "使用方法: unity update /path/to/unity/webgl/build"
+            echo ""
+            echo "💡 如需上传文件指南，请执行: unity upload-help"
+            exit 1
+        fi
+        echo "🔄 更新Unity项目..."
+        bash "$SCRIPTS_DIR/update_unity_build.sh" "$2"
+        ;;
+    check|status|c)
+        echo "📊 检查Unity WebGL服务状态..."
+        if [ -f "$SCRIPTS_DIR/check_unity_status.sh" ]; then
+            bash "$SCRIPTS_DIR/check_unity_status.sh"
+        else
+            echo "正在检查服务状态..."
+            if pgrep -f "secure_unity_server.py" > /dev/null; then
+                echo "✅ Unity安全服务器: 运行中"
+            else
+                echo "❌ Unity安全服务器: 未运行"
+            fi
+            if pgrep -f "ngrok" > /dev/null; then
+                echo "✅ ngrok隧道: 运行中"
+            else
+                echo "❌ ngrok隧道: 未运行"
+            fi
+        fi
+        ;;
+    logs|l)
+        echo "📋 查看服务日志..."
+        if [ -f "$LOGS_DIR/secure_unity.log" ]; then
+            tail -f "$LOGS_DIR/secure_unity.log"
+        else
+            echo "❌ 日志文件不存在"
+        fi
+        ;;
+    ngrok-logs|nl)
+        echo "📋 查看ngrok日志..."
+        if [ -f "$LOGS_DIR/ngrok_secure.log" ]; then
+            tail -f "$LOGS_DIR/ngrok_secure.log"
+        else
+            echo "❌ ngrok日志文件不存在"
+        fi
+        ;;
+    info|i)
+        echo "📄 显示部署信息..."
+        if [ -f "$CONFIGS_DIR/secure_deployment_info.txt" ]; then
+            cat "$CONFIGS_DIR/secure_deployment_info.txt"
+        else
+            echo "❌ 部署信息文件不存在"
+        fi
+        ;;
+    clean)
+        echo "🧹 清理临时文件..."
+        rm -f /tmp/unity_*.log /tmp/unity_security_config.sh
+        rm -rf /home/yuquan/temp/webgl-build 2>/dev/null
+        echo "✅ 临时文件已清理"
+        ;;
+    help|h|*)
+        echo "Unity WebGL 安全部署管理工具"
+        echo "=============================="
+        echo ""
+        echo "使用方法: unity <命令> [选项]"
+        echo ""
+        echo "可用命令:"
+        echo "  start, s       启动安全服务"
+        echo "  stop           停止服务"
+        echo "  restart, r     重启服务"  
+        echo "  upload-help, uh 显示文件上传指南"
+        echo "  update, u      更新Unity项目"
+        echo "  check, c       检查服务状态"
+        echo "  logs, l        查看服务日志"
+        echo "  ngrok-logs, nl 查看ngrok日志"
+        echo "  info, i        显示部署信息"
+        echo "  clean          清理临时文件"
+        echo "  help, h        显示此帮助"
+        echo ""
+        echo "示例:"
+        echo "  unity start              # 启动服务"
+        echo "  unity upload-help        # 查看文件上传指南"
+        echo "  unity update /home/yuquan/temp/webgl-build  # 更新Unity项目"
+        echo "  unity check              # 检查状态"
+        echo "  unity logs               # 查看日志"
+        ;;
+esac

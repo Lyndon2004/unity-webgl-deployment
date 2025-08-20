@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity WebGL 部署示例</title>
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+        var unityInstance = UnityLoader.instantiate("unityContainer", "Build/YourGameName.json", {onProgress: UnityProgress});
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .message {
+            background-color: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 600px;
+        }
+        .info {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>Unity WebGL 示例</h1>
+        <p>这是一个示例Unity WebGL部署页面。请替换为您自己的Unity WebGL构建文件。</p>
+        <p>使用<code>unity update /path/to/your/webgl/build</code>命令更新此部署。</p>
+    </div>
+    <div class="info">
+        <p>Unity WebGL部署工具 | 安全级别: 1 - 基础 | 更多信息请访问项目GitHub</p>
+    </div>
+</body>
+</html>
