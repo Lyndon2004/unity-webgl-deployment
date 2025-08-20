@@ -1,7 +1,7 @@
 # ngrok隧道日志
 # 该文件记录ngrok连接和流量信息
 
-t=2023-11-10T08:30:46+0000 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040
-t=2023-11-10T08:30:46+0000 lvl=info msg="tunnel session started" obj=tunnels.session
-t=2023-11-10T08:30:46+0000 lvl=info msg="started tunnel" obj=tunnels name=command_line addr=http://localhost:5000 url=https://xxxx-xx-xx-xxx-xx.ngrok-free.app
-t=2023-11-10T08:31:22+0000 lvl=info msg="http request" obj=http conn_id=1 start=2023-11-10T08:31:22+0000 duration=50ms status=200 bytes_in=0 bytes_out=2718
+t=2025-08-20T08:30:46+0000 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040
+t=2025-08-20T08:30:46+0000 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2025-08-20T08:30:46+0000 lvl=info msg="started tunnel" obj=tunnels name=command_line addr=http://localhost:5000 url=https://xxxx-xx-xx-xxx-xx.ngrok-free.app
+t=2025-08-20T08:31:22+0000 lvl=info msg="http request" obj=http conn_id=1 start=2025-08-20T08:31:22+0000 duration=50ms status=200 bytes_in=0 bytes_out=2718

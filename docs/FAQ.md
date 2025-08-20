@@ -119,7 +119,7 @@ unity restart # 重启服务
 ls -la ~/unity-webgl-deployment/backups
 
 # 删除旧备份
-rm -rf ~/unity-webgl-deployment/backups/unity-build-backup-20230101-120000
+rm -rf ~/unity-webgl-deployment/backups/unity-build-backup-20250820-120000
 ```
 
 ## 安全问题
